@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+{% include 'parciais/_messages.html'%}
+
+
+{% block conteudo %}
+<br>
+
+{% include 'parciais/_messages.html' %}
+
+<form method="get" action="{% url 'busca' %}">
+  <div class="form-group row">
+    <div class="col-12">
+      <input type="search" class="form-control" id="search-input" value="{{ request.GET.termo }}" name="termo" placeholder="Buscar">
+
+        </div>
+  </div>
+</form>
+
+<div  class="mb-3">
+    <a href="{% url 'novo_contato' %}" class="btn btn-primary">Novo Contato</a>
+</div>
+<h1 class="mt-5">Minha agenda</h1>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th> ID </th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>Telefone</th>
+              <th>Categoria</th>
+              <th>Descricao</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for contato in contatos %}
+
+            <tr>
+              <td> {{ contato.id }}</td>
+              <td>
+                <a href="{% url 'ver_contato' contato.id %}"> {{ contato.nome }}</a>
+              </td>
+                <td>{{ contato.sobrenome }}</td>
+                <td>{{ contato.telefone }}</td>
+                <td>{{ contato.categoria}}</td>
+                <td> {{ contato.descricao }}</td>
+            </tr>
+           {% endfor %}
+
+          </tbody>
+        </table>
+
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% for pagina in contatos.paginator.page_range %}
+      {% if contatos.paginator.number == pagina %}
+      <li class="page-item active"><a class="page-link" href="?p={{ pagina }}"> {{ pagina }}</a>
+      </li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="?p={{ pagina }}"> {{ pagina }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+{%endblock%}
+
+
+
+
+
+
+
+
+
+

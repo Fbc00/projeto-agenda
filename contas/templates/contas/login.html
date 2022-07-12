@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block conteudo %}
+<br><br>
+  <form class="px-4 py-3" method="post" action="{% url 'login'%}"> {% csrf_token %}
+    {% include 'parciais/_messages.html'%}
+    <div class="mb-3">
+      <label for="exampleDropdownFormEmail1" class="form-label">Usuario</label>
+      <input type="text" class="form-control" id="exampleDropdownFormEmail1" name="usuario"placeholder="Usuario">
+    </div>
+    <div class="mb-3">
+      <label for="exampleDropdownFormPassword1" class="form-label">Senha</label>
+      <input type="password" class="form-control"  name="senha" id="exampleDropdownFormPassword1" placeholder="Senha">
+    </div>
+    <div class="mb-3">
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+    <br>
+     <div>
+      <a href="{% url 'registrer' %}">Registrar</a>
+    </div>
+  </form>
+
+
+{% endblock %}
